@@ -36,9 +36,9 @@ public class MainController {
 
     }
 
-    @PostMapping(path="/add") // Map ONLY POST Requests
+    @PostMapping(path = "/add") // Map ONLY POST Requests
     public @ResponseBody
-    String addNewUser (@RequestParam String name
+    String addNewUser(@RequestParam String name
         , @RequestParam String email) {
         // @ResponseBody means the returned String is the response, not a view name
         // @RequestParam means it is a parameter from the GET or POST request
@@ -50,8 +50,16 @@ public class MainController {
         return "Saved";
     }
 
-    @GetMapping(path="/all")
-    public @ResponseBody Iterable<User> getAllUsers() {
+    @GetMapping(path = "/greeting")
+    public @ResponseBody
+    String greet() {
+        return "hello world";
+    }
+
+
+    @GetMapping(path = "/all")
+    public @ResponseBody
+    Iterable<User> getAllUsers() {
         // This returns a JSON or XML with the users
         return userRepository.findAll();
     }
