@@ -9,4 +9,6 @@ import cz.burj.jpa.pattern.User;
 
 public interface UserRepository extends CrudRepository<User, Integer> {
 
+
+
 }

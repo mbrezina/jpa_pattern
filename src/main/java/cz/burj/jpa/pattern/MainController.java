@@ -1,12 +1,11 @@
 package cz.burj.jpa.pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,9 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.xml.crypto.Data;
-import java.io.IOException;
-import java.util.List;
+import java.util.Optional;
 
 
 @Controller // This means that this class is a Controller
@@ -54,6 +51,15 @@ public class MainController {
     public @ResponseBody
     String greet() {
         return "hello world";
+    }
+
+
+    //@PostMapping(path = "/findOne")
+    @PostMapping(path = "/findOne/{id}")
+    //@PostMapping(value = "/users", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody
+    Optional<User> getOneUser(@PathVariable Integer id) {
+        return userRepository.findById(id);
     }
 
 
