@@ -33,17 +33,18 @@ public class MainController {
 
     }
 
-    @PostMapping(path = "/add") // Map ONLY POST Requests
+    @PostMapping(path = "/add", consumes = "application/json") // Map ONLY POST Requests
     public @ResponseBody
-    String addNewUser(@RequestParam String name
-        , @RequestParam String email) {
+    String addNewUser(@RequestBody User user) {
         // @ResponseBody means the returned String is the response, not a view name
         // @RequestParam means it is a parameter from the GET or POST request
 
-        User n = new User();
-        n.setName(name);
-        n.setEmail(email);
-        userRepository.save(n);
+        //User n = new User();
+        //n.setName(name);
+        //n.setEmail(email);
+        System.out.println("jsem tady");
+        System.out.println(user);
+        userRepository.save(user);
         return "Saved";
     }
 
@@ -54,9 +55,9 @@ public class MainController {
     }
 
 
-    //@PostMapping(path = "/findOne")
+
+
     @PostMapping(path = "/findOne/{id}")
-    //@PostMapping(value = "/users", consumes = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
     Optional<User> getOneUser(@PathVariable Integer id) {
         return userRepository.findById(id);
